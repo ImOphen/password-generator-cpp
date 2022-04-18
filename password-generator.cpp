@@ -5,10 +5,10 @@ int main()
 	std::string 	password;
 	std::string 	input;
 	int 			length;
-	
+
 	std::string 	alphabets 			= "abcdefghijklmnopqrstuvwxyz";
 	std::string 	numbers				= "0123456789";
-	std::string 	special_characters	= "!@#%^&?*()";
+	std::string 	special_characters	= "!@#%?*";
 
 	std::cout << "How long do you want your password to be ? : ";
 	std::getline(std::cin, input);
@@ -25,22 +25,13 @@ int main()
 	srand(time(NULL));
 	for (int i = 0; i < length; i++)
 	{
-		int random_number = rand() % 3;
-		if (random_number == 0)
-		{
-			int random_number_2 = rand() % alphabets.length();
-			password += alphabets[random_number_2];
-		}
-		else if (random_number == 1)
-		{
-			int random_number_2 = rand() % numbers.length();
-			password += numbers[random_number_2];
-		}
-		else if (random_number == 2)
-		{
-			int random_number_2 = rand() % special_characters.length();
-			password += special_characters[random_number_2];
-		}
+		int random_number = rand() % 8;
+		if (random_number <= 3)
+			password += alphabets[rand() % alphabets.length()];
+		else if (random_number < 6)
+			password += numbers[rand() % numbers.length()];
+		else
+			password += special_characters[rand() % special_characters.length()];
 	}
 	std::cout << "Your generated password is : " << password << std::endl;
 	system(("echo \"" +password + "\" | pbcopy").c_str());
